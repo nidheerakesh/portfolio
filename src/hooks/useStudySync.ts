@@ -51,6 +51,7 @@ export interface PortfolioData {
   categories: Record<string, CategoryBreakdown>;
   currentFocus: string | null;
   buildLog: BuildLogEntry[];
+  completedTasks: string[];
   activeMilestone: string;
 }
 

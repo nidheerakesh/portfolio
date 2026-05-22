@@ -1,4 +1,5 @@
-import { ArrowRight, BookOpen, Terminal, Sparkles, Smile, GraduationCap, MapPin, Code } from "lucide-react";
+import { ArrowRight, BookOpen, Terminal, Sparkles, Smile, GraduationCap, MapPin, Code, Activity, CheckCircle2 } from "lucide-react";
+import { useStudySync } from "../hooks/useStudySync";
 
 interface AboutPanelProps {
   onNotify: (msg: string, type: "success" | "info" | "bubble") => void;
@@ -6,6 +7,8 @@ interface AboutPanelProps {
 }
 
 export default function AboutPanel({ onNotify, onSetTab }: AboutPanelProps) {
+  const { portfolioData } = useStudySync(true);
+
   return (
     <div className="w-full text-[#2B2B2B] font-sans">
       {/* Editorial Heading */}
@@ -121,24 +124,52 @@ export default function AboutPanel({ onNotify, onSetTab }: AboutPanelProps) {
             </p>
 
             <div className="space-y-3 font-mono text-xs">
-              <div className="p-2 bg-white/60 border border-[#2B2B2B]/15 rounded-xl">
-                <span className="text-rose-pink font-bold">→ </span> LEARNING:
-                <div className="font-sans font-medium text-sm mt-0.5 text-[#2B2B2B]/90">
-                  React 19 & Complex Signal Analysis
+              {portfolioData?.currentFocus ? (
+                <div className="p-2 bg-white/60 border border-rose-pink/40 rounded-xl">
+                  <span className="text-rose-pink font-bold flex items-center gap-1.5 mb-0.5">
+                    <Activity size={12} className="animate-pulse" /> ACTIVE FOCUS:
+                  </span>
+                  <div className="font-sans font-bold text-sm mt-0.5 text-[#2B2B2B]/90">
+                    {portfolioData.currentFocus}
+                  </div>
                 </div>
-              </div>
-              <div className="p-2 bg-white/60 border border-[#2B2B2B]/15 rounded-xl">
-                <span className="text-dusty-lavender font-bold">→ </span> EXPLORING:
-                <div className="font-sans font-medium text-sm mt-0.5 text-[#2B2B2B]/90">
-                  AI/ML Convolutional Pipelines
+              ) : (
+                <div className="p-2 bg-white/60 border border-[#2B2B2B]/15 rounded-xl">
+                  <span className="text-rose-pink font-bold">→ </span> LEARNING:
+                  <div className="font-sans font-medium text-sm mt-0.5 text-[#2B2B2B]/90">
+                    React 19 & Complex Signal Analysis
+                  </div>
                 </div>
-              </div>
-              <div className="p-2 bg-white/60 border border-[#2B2B2B]/15 rounded-xl">
-                <span className="text-blush-pink font-bold">→ </span> BUILDING:
-                <div className="font-sans font-medium text-sm mt-0.5 text-[#2B2B2B]/90">
-                  B.Tech Exam Hack planners
-                </div>
-              </div>
+              )}
+
+              {portfolioData?.buildLog && portfolioData.buildLog.length > 0 ? (
+                portfolioData.buildLog.slice(0, 2).map((log, i) => (
+                  <div key={i} className="p-2 bg-white/60 border border-[#2B2B2B]/15 rounded-xl">
+                    <span className="text-green-600 font-bold flex items-center gap-1.5 mb-0.5">
+                      <CheckCircle2 size={12} /> COMPLETED:
+                    </span>
+                    <div className="font-sans font-medium text-sm mt-0.5 text-[#2B2B2B]/90 flex justify-between items-start">
+                      <span className="pr-2 leading-tight">{log.taskId}</span>
+                      <span className="text-[10px] text-green-600 font-mono font-bold shrink-0 pt-0.5">+{log.xpEarned} XP</span>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <>
+                  <div className="p-2 bg-white/60 border border-[#2B2B2B]/15 rounded-xl">
+                    <span className="text-dusty-lavender font-bold">→ </span> EXPLORING:
+                    <div className="font-sans font-medium text-sm mt-0.5 text-[#2B2B2B]/90">
+                      AI/ML Convolutional Pipelines
+                    </div>
+                  </div>
+                  <div className="p-2 bg-white/60 border border-[#2B2B2B]/15 rounded-xl">
+                    <span className="text-blush-pink font-bold">→ </span> BUILDING:
+                    <div className="font-sans font-medium text-sm mt-0.5 text-[#2B2B2B]/90">
+                      B.Tech Exam Hack planners
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 

@@ -29,7 +29,6 @@ import ExperiencePanel from "./components/ExperiencePanel";
 import ResumePanel from "./components/ResumePanel";
 import ContactPanel from "./components/ContactPanel";
 import AiCompanionWidget from "./components/AiCompanionWidget";
-import StudyProgressCard from "./components/StudyProgressCard";
 
 type ActiveTab = "about" | "projects" | "skills" | "experience" | "resume" | "contact";
 type BackgroundTheme = "dots" | "ruled" | "grid";
@@ -54,17 +53,6 @@ export default function App() {
   const [isRecruiterMode, setIsRecruiterMode] = useState<boolean>(() => {
     return localStorage.getItem("nidhi_recruiter_mode") === "true";
   });
-
-  // High-Security Planner Web-Integration System
-  const [isSyncActive, setIsSyncActive] = useState<boolean>(() => {
-    return localStorage.getItem("nidhi_planner_active") !== "false";
-  });
-
-  const handleToggleSync = (active: boolean) => {
-    setIsSyncActive(active);
-    localStorage.setItem("nidhi_planner_active", JSON.stringify(active));
-    window.dispatchEvent(new CustomEvent("planner_sync_state_toggled"));
-  };
 
   // Show a gorgeous Neo-Brutalist notification toast in the corner
   const showNotification = (msg: string, type: "success" | "info" | "bubble" = "success") => {
@@ -203,10 +191,10 @@ export default function App() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-4">
+          <div className="flex flex-col gap-8 mt-4">
             
-            {/* Left Big Bio */}
-            <div className="lg:col-span-7 space-y-5">
+            {/* Big Bio */}
+            <div className="space-y-5">
               <div className="space-y-1">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-dusty-lavender font-mono text-xs font-bold border-2 border-[#2B2B2B] rounded-xl shadow-[2px_2px_0px_0px_#2B2B2B]">
                   <Sparkles size={12} className="text-purple-600 animate-pulse" /> 
@@ -247,15 +235,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Right Interactive Notebook Status block (External Planner App Integrator Panel) */}
-            <StudyProgressCard 
-              isActive={isSyncActive} 
-              onToggleActive={handleToggleSync} 
-              onNotify={showNotification} 
-            />
-
           </div>
-        </div>
 
         {/* HIGH-FIDELITY MACARON BROWSER WINDOW WRAPPER */}
         <div className="bg-white border-4 border-[#2B2B2B] rounded-3xl shadow-[8px_8px_0px_0px_#2B2B2B] overflow-hidden transition-all flex flex-col">

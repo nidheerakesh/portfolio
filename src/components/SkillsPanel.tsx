@@ -19,6 +19,32 @@ export default function SkillsPanel({ onNotify }: SkillsPanelProps) {
 
   const { portfolioData } = useStudySync(true);
 
+  // Derive dynamic skills based on AEON task completion
+  const displaySkills = React.useMemo(() => {
+    const cloned = JSON.parse(JSON.stringify(skillsData));
+    
+    if (portfolioData && portfolioData.completedTasks) {
+      const completedStr = portfolioData.completedTasks.join(" ").toLowerCase();
+      
+      // Find the "Domains" category or fallback to second category
+      const domainsCat = cloned.find((c: any) => c.title === "Domains") || cloned[1];
+      
+      if (domainsCat) {
+        if (completedStr.includes("matplotlib") && !domainsCat.items.includes("Matplotlib")) {
+          domainsCat.items.push("Matplotlib");
+        }
+        if (completedStr.includes("seaborn") && !domainsCat.items.includes("Seaborn")) {
+          domainsCat.items.push("Seaborn");
+        }
+        if (completedStr.includes("pandas") && !domainsCat.items.includes("Pandas")) {
+          domainsCat.items.push("Pandas");
+        }
+      }
+    }
+    
+    return cloned;
+  }, [portfolioData]);
+
   const handleTogglePin = (skill: string) => {
     if (pinnedSkills.includes(skill)) {
       setPinnedSkills(pinnedSkills.filter((s) => s !== skill));
@@ -60,7 +86,7 @@ export default function SkillsPanel({ onNotify }: SkillsPanelProps) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        {skillsData.map((category, idx) => (
+        {displaySkills.map((category: any, idx: number) => (
           <div
             key={idx}
             className="bg-white border-4 border-[#2B2B2B] rounded-2xl shadow-[4px_4px_0px_0px_#2B2B2B] overflow-hidden"
