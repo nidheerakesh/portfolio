@@ -320,7 +320,7 @@ export default function App() {
                   onClick={() => handleTabChange(tab.id as ActiveTab)}
                   className={`brutal-btn p-2 px-4 rounded-xl flex items-center gap-2 font-mono text-xs font-bold uppercase transition-all ${
                     isActive
-                      ? "bg-rose-pink border-3 border-[#2B2B2B] text-[#2B2B2B] shadow-[2.5px_2.5px_0px_#2B2B2B]"
+                      ? "bg-rose-pink border-3 border-[#2B2B2B] text-[#2B2B2B] shadow-[3px_3px_0px_#2B2B2B]"
                       : "bg-white border-2 border-[#2B2B2B]/60 text-[#2B2B2B]/70 hover:bg-cream hover:text-[#2B2B2B]"
                   }`}
                 >

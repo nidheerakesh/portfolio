@@ -156,7 +156,7 @@ export default function StudyProgressCard({
           type="button"
           onClick={handleManualSync}
           disabled={isSyncing || !isActive}
-          className={`w-full text-center py-2.5 border-2 border-[#2B2B2B] rounded-xl font-bold font-mono text-[10px] uppercase shadow-[2.5px_2.5px_0px_#2B2B2B] active:translate-y-[1px] transition-all cursor-pointer ${
+          className={`w-full text-center py-2.5 border-2 border-[#2B2B2B] rounded-xl font-bold font-mono text-[10px] uppercase shadow-[3px_3px_0px_#2B2B2B] active:translate-y-[1px] transition-all cursor-pointer ${
             !isActive
               ? "bg-gray-100 text-gray-400 border-gray-300 shadow-none cursor-not-allowed transform-none"
               : "bg-dusty-lavender hover:bg-[#C9B6E4] text-[#2B2B2B]"
