@@ -26,20 +26,41 @@ export default function SkillsPanel({ onNotify }: SkillsPanelProps) {
     if (portfolioData && portfolioData.completedTasks) {
       const completedStr = portfolioData.completedTasks.join(" ").toLowerCase();
       
-      // Find the "Domains" category or fallback to second category
-      const domainsCat = cloned.find((c: any) => c.title === "Domains") || cloned[1];
-      
-      if (domainsCat) {
-        if (completedStr.includes("matplotlib") && !domainsCat.items.includes("Matplotlib")) {
-          domainsCat.items.push("Matplotlib");
+      const mapSkill = (categoryName: string, keywordMatch: string[], skillName: string) => {
+        const cat = cloned.find((c: any) => c.title === categoryName);
+        if (cat && !cat.items.includes(skillName) && keywordMatch.some(kw => completedStr.includes(kw))) {
+          cat.items.push(skillName);
         }
-        if (completedStr.includes("seaborn") && !domainsCat.items.includes("Seaborn")) {
-          domainsCat.items.push("Seaborn");
-        }
-        if (completedStr.includes("pandas") && !domainsCat.items.includes("Pandas")) {
-          domainsCat.items.push("Pandas");
-        }
-      }
+      };
+
+      // --- ML & Data Science (Domains) ---
+      mapSkill("Domains", ["matplotlib", "seaborn"], "Matplotlib & Seaborn");
+      mapSkill("Domains", ["numpy", "pandas"], "NumPy & Pandas");
+      mapSkill("Domains", ["scikit-learn", "regression", "classification"], "Scikit-Learn");
+      mapSkill("Domains", ["cnn", "convolutional", "cifar"], "Computer Vision (CNN)");
+      mapSkill("Domains", ["rnn", "lstm", "gru"], "Time Series & RNNs");
+      mapSkill("Domains", ["transformer", "bert", "huggingface"], "NLP & Transformers");
+      mapSkill("Domains", ["autoencoder", "gan", "generative"], "Generative AI");
+      mapSkill("Domains", ["reinforcement", "q-learning"], "Reinforcement Learning");
+      mapSkill("Domains", ["shap", "lime", "explainable"], "Explainable AI (XAI)");
+
+      // --- Backend & Cloud (Tools & OS) ---
+      mapSkill("Tools & OS", ["node.js", "express"], "Node.js");
+      mapSkill("Tools & OS", ["fastapi"], "FastAPI");
+      mapSkill("Tools & OS", ["postgres", "sql"], "PostgreSQL");
+      mapSkill("Tools & OS", ["mongodb", "nosql"], "MongoDB");
+      mapSkill("Tools & OS", ["redis", "caching"], "Redis");
+      mapSkill("Tools & OS", ["docker", "container"], "Docker");
+      mapSkill("Tools & OS", ["kubernetes", "minikube"], "Kubernetes");
+      mapSkill("Tools & OS", ["terraform", "iac"], "Terraform");
+      mapSkill("Tools & OS", ["aws", "gcp", "azure"], "Cloud (AWS/GCP)");
+
+      // --- MLOps (Tools & OS) ---
+      mapSkill("Tools & OS", ["mlflow", "experiment tracking"], "MLflow");
+      mapSkill("Tools & OS", ["airflow", "kubeflow", "dag"], "Apache Airflow");
+      mapSkill("Tools & OS", ["dvc", "data version"], "DVC");
+      mapSkill("Tools & OS", ["prometheus", "grafana", "monitoring"], "Prometheus & Grafana");
+      mapSkill("Tools & OS", ["kafka", "rabbitmq"], "Kafka/RabbitMQ");
     }
     
     return cloned;
