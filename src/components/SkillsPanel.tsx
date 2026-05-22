@@ -34,33 +34,33 @@ export default function SkillsPanel({ onNotify }: SkillsPanelProps) {
       };
 
       // --- ML & Data Science (Domains) ---
-      mapSkill("Domains", ["matplotlib", "seaborn"], "Matplotlib & Seaborn");
-      mapSkill("Domains", ["numpy", "pandas"], "NumPy & Pandas");
-      mapSkill("Domains", ["scikit-learn", "regression", "classification"], "Scikit-Learn");
-      mapSkill("Domains", ["cnn", "convolutional", "cifar"], "Computer Vision (CNN)");
-      mapSkill("Domains", ["rnn", "lstm", "gru"], "Time Series & RNNs");
-      mapSkill("Domains", ["transformer", "bert", "huggingface"], "NLP & Transformers");
-      mapSkill("Domains", ["autoencoder", "gan", "generative"], "Generative AI");
-      mapSkill("Domains", ["reinforcement", "q-learning"], "Reinforcement Learning");
-      mapSkill("Domains", ["shap", "lime", "explainable"], "Explainable AI (XAI)");
+      mapSkill("Domains", ["matplotlib", "seaborn", "w1d6_ml"], "Matplotlib & Seaborn");
+      mapSkill("Domains", ["numpy", "pandas", "w1d5_ml"], "NumPy & Pandas");
+      mapSkill("Domains", ["scikit-learn", "regression", "classification", "w2d2_ml", "w2d3_ml"], "Scikit-Learn");
+      mapSkill("Domains", ["cnn", "convolutional", "cifar", "w3d4_ml"], "Computer Vision (CNN)");
+      mapSkill("Domains", ["rnn", "lstm", "gru", "w3d5_ml"], "Time Series & RNNs");
+      mapSkill("Domains", ["transformer", "bert", "huggingface", "w3d6_ml", "w4d2_ml"], "NLP & Transformers");
+      mapSkill("Domains", ["autoencoder", "gan", "generative", "w3d7_ml"], "Generative AI");
+      mapSkill("Domains", ["reinforcement", "q-learning", "w4d1_ml"], "Reinforcement Learning");
+      mapSkill("Domains", ["shap", "lime", "explainable", "w4d4_ml"], "Explainable AI (XAI)");
 
       // --- Backend & Cloud (Tools & OS) ---
-      mapSkill("Tools & OS", ["node.js", "express"], "Node.js");
-      mapSkill("Tools & OS", ["fastapi"], "FastAPI");
-      mapSkill("Tools & OS", ["postgres", "sql"], "PostgreSQL");
-      mapSkill("Tools & OS", ["mongodb", "nosql"], "MongoDB");
-      mapSkill("Tools & OS", ["redis", "caching"], "Redis");
-      mapSkill("Tools & OS", ["docker", "container"], "Docker");
-      mapSkill("Tools & OS", ["kubernetes", "minikube"], "Kubernetes");
-      mapSkill("Tools & OS", ["terraform", "iac"], "Terraform");
-      mapSkill("Tools & OS", ["aws", "gcp", "azure"], "Cloud (AWS/GCP)");
+      mapSkill("Tools & OS", ["node.js", "express", "w1d3_backend"], "Node.js");
+      mapSkill("Tools & OS", ["fastapi", "w3d2_mlops"], "FastAPI");
+      mapSkill("Tools & OS", ["postgres", "sql", "w2d1_backend", "w2d2_backend"], "PostgreSQL");
+      mapSkill("Tools & OS", ["mongodb", "nosql", "w4d3_backend"], "MongoDB");
+      mapSkill("Tools & OS", ["redis", "caching", "w2d7_backend"], "Redis");
+      mapSkill("Tools & OS", ["docker", "container", "w3d5_backend", "w2d1_mlops"], "Docker");
+      mapSkill("Tools & OS", ["kubernetes", "minikube", "w2d2_mlops"], "Kubernetes");
+      mapSkill("Tools & OS", ["terraform", "iac", "w1d6_mlops"], "Terraform");
+      mapSkill("Tools & OS", ["aws", "gcp", "azure", "w1d5_mlops"], "Cloud (AWS/GCP)");
 
       // --- MLOps (Tools & OS) ---
-      mapSkill("Tools & OS", ["mlflow", "experiment tracking"], "MLflow");
-      mapSkill("Tools & OS", ["airflow", "kubeflow", "dag"], "Apache Airflow");
-      mapSkill("Tools & OS", ["dvc", "data version"], "DVC");
-      mapSkill("Tools & OS", ["prometheus", "grafana", "monitoring"], "Prometheus & Grafana");
-      mapSkill("Tools & OS", ["kafka", "rabbitmq"], "Kafka/RabbitMQ");
+      mapSkill("Tools & OS", ["mlflow", "experiment tracking", "w2d3_mlops"], "MLflow");
+      mapSkill("Tools & OS", ["airflow", "kubeflow", "dag", "w2d6_mlops"], "Apache Airflow");
+      mapSkill("Tools & OS", ["dvc", "data version", "w1d3_mlops"], "DVC");
+      mapSkill("Tools & OS", ["prometheus", "grafana", "monitoring", "w3d3_mlops"], "Prometheus & Grafana");
+      mapSkill("Tools & OS", ["kafka", "rabbitmq", "w3d6_backend", "w2d5_mlops"], "Kafka/RabbitMQ");
     }
     
     return cloned;
