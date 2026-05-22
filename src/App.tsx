@@ -103,7 +103,7 @@ export default function App() {
       />
 
       {/* Main Core Container */}
-      <div className="w-full max-w-6xl mx-auto px-4 pt-6 space-y-8">
+      <div className="w-full max-w-[95%] 2xl:max-w-[1600px] mx-auto px-4 pt-6 space-y-8">
         
         {/* UPPER CUSTOMIZER HEADER (Macaron Toolbelt Drawer) */}
         <div className="bg-white border-4 border-[#2B2B2B] rounded-2xl p-4 shadow-[6px_6px_0px_0px_rgba(43,43,43,1)] flex flex-wrap items-center justify-between gap-4">

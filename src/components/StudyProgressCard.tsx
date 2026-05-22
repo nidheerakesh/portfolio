@@ -291,6 +291,37 @@ export default function StudyProgressCard({
                   </div>
                 )}
 
+                {/* Active Task / Build Log */}
+                {portfolioData && (
+                  <div className="bg-white p-3 border-2 border-[#2B2B2B] rounded-xl space-y-2">
+                    {portfolioData.currentFocus && (
+                      <div className="border-b border-dashed border-[#2B2B2B]/20 pb-2 mb-2">
+                        <div className="text-[9px] font-bold uppercase text-[#2B2B2B]/50 tracking-wider mb-1 flex items-center gap-1">
+                          <Activity size={9} className="text-rose-pink animate-pulse" /> ACTIVE TASK
+                        </div>
+                        <div className="text-[11px] font-bold font-mono">
+                          {portfolioData.currentFocus}
+                        </div>
+                      </div>
+                    )}
+                    {portfolioData.buildLog && portfolioData.buildLog.length > 0 && (
+                      <div>
+                        <div className="text-[9px] font-bold uppercase text-[#2B2B2B]/50 tracking-wider mb-1.5 flex items-center gap-1">
+                          <CheckCircle2 size={9} className="text-green-500" /> RECENTLY COMPLETED
+                        </div>
+                        <div className="space-y-1">
+                          {portfolioData.buildLog.slice(0, 3).map((log, i) => (
+                            <div key={i} className="flex items-center justify-between text-[10px] bg-gray-50 p-1.5 rounded border border-[#2B2B2B]/10 font-mono">
+                              <span className="truncate pr-2 text-[#2B2B2B]/80">{log.taskId}</span>
+                              <span className="text-green-600 font-bold shrink-0">+{log.xpEarned} XP</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 {/* Milestone + Meta */}
                 <div className="space-y-1.5 text-[10.5px]">
                   <div className="flex gap-1.5 items-start bg-white p-2 border border-[#2B2B2B]/10 rounded-lg">

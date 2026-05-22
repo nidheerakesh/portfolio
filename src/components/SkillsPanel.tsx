@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { skillsData } from "../data";
 import { Check, Star, BadgeCheck, Terminal, Award, Plus, Layers, Flame } from "lucide-react";
+import { useStudySync } from "../hooks/useStudySync";
 
 interface SkillsPanelProps {
   onNotify: (msg: string, type: "success" | "info" | "bubble") => void;
@@ -15,6 +16,8 @@ export default function SkillsPanel({ onNotify }: SkillsPanelProps) {
   ]);
 
   const [customSkill, setCustomSkill] = useState("");
+
+  const { portfolioData } = useStudySync(true);
 
   const handleTogglePin = (skill: string) => {
     if (pinnedSkills.includes(skill)) {
@@ -106,6 +109,30 @@ export default function SkillsPanel({ onNotify }: SkillsPanelProps) {
           </div>
         ))}
       </div>
+
+      {/* AEON Verified Skills Tracker */}
+      {portfolioData && Object.keys(portfolioData.categories).length > 0 && (
+        <div className="bg-white border-4 border-[#2B2B2B] rounded-2xl p-6 shadow-[5px_5px_0px_0px_#2B2B2B] mb-8">
+          <div className="flex items-center gap-2 mb-4 border-b-2 border-dashed border-[#2B2B2B]/20 pb-3">
+            <Award size={20} className="text-rose-pink" />
+            <h3 className="font-heading text-xl font-bold">AEON Verified Progress</h3>
+            <span className="text-[10px] font-mono bg-green-100 text-green-700 px-2 py-0.5 rounded border border-green-300 ml-auto flex items-center gap-1">
+              <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> LIVE SYNC
+            </span>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {Object.entries(portfolioData.categories).map(([category, stats], idx) => (
+              <div key={idx} className="bg-[#FFF7F8] p-3 rounded-xl border-2 border-[#2B2B2B] flex flex-col justify-center items-center text-center shadow-[2px_2px_0px_#2B2B2B]">
+                <div className="font-mono font-bold text-xs mb-1 uppercase tracking-tight">{category}</div>
+                <div className="flex items-baseline gap-1 text-[#2B2B2B]/70">
+                  <span className="text-xl font-black text-rose-pink">{stats.completed}</span>
+                  <span className="text-[10px] font-bold uppercase">/ {stats.total} Tasks</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Recruiter Custom Pinned Hub */}
       <div className="bg-dusty-lavender/50 border-4 border-[#2B2B2B] rounded-2xl p-6 shadow-[5px_5px_0px_0px_#2B2B2B] relative overflow-hidden">

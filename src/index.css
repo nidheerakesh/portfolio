@@ -196,6 +196,14 @@
 }
 
 /* Ensure text inside custom high-contrast note tabs stays dark */
+.dark-mode .bg-blush-pink,
+.dark-mode .bg-dusty-lavender,
+.dark-mode .bg-cream,
+.dark-mode .bg-rose-pink,
+.dark-mode [class*="bg-blush-pink"],
+.dark-mode [class*="bg-dusty-lavender"],
+.dark-mode [class*="bg-cream"],
+.dark-mode [class*="bg-rose-pink"],
 .dark-mode .bg-blush-pink *,
 .dark-mode .bg-dusty-lavender *,
 .dark-mode .bg-cream *,
