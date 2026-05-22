@@ -1,0 +1,6 @@
+{
+  "name": "Nidhi - Student Portfolio",
+  "description": "Personal engineering notebook & Linux workspace styled portfolio for Nidhi, B.Tech student at IIIT Kottayam.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

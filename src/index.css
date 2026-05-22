@@ -1,0 +1,372 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Architects+Daughter&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-blush-pink: #F9D7E6;
+  --color-rose-pink: #F3B6CF;
+  --color-cream: #FFF7F8;
+  --color-dusty-lavender: #DCCEF5;
+  --color-soft-gray: #E8E6E6;
+  --color-dark-charcoal: #2B2B2B;
+
+  --font-heading: Georgia, serif;
+  --font-sans: "Poppins", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-hand: "Architects Daughter", cursive;
+}
+
+@layer utilities {
+  /* High Density Radial Dot background */
+  .high-density-dots {
+    background-image: radial-gradient(#E8E6E6 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-color: #FFF7F8;
+  }
+
+  /* Ruled notebook line styling */
+  .notebook-ruled {
+    background-image: linear-gradient(#2b2b2b12 1px, transparent 1px);
+    background-size: 100% 1.8rem;
+    line-height: 1.8rem;
+  }
+
+  /* Engineering grid background */
+  .notebook-grid {
+    background-size: 24px 24px;
+    background-image: linear-gradient(to right, rgba(43, 43, 43, 0.05) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(43, 43, 43, 0.05) 1px, transparent 1px);
+  }
+
+  /* Pastel checkerboard background matching Macaron browser vibes */
+  .checkerboard {
+    background-color: #FFF7F8;
+    background-image: linear-gradient(45deg, #F3B6CF 25%, transparent 25%),
+                      linear-gradient(-45deg, #F3B6CF 25%, transparent 25%),
+                      linear-gradient(45deg, transparent 75%, #F3B6CF 75%),
+                      linear-gradient(-45deg, transparent 75%, #F3B6CF 75%);
+    background-size: 32px 32px;
+    background-position: 0 0, 0 16px, 16px -16px, -16px 0;
+    background-blend-mode: multiply;
+    opacity: 0.85;
+  }
+
+  /* Spiral binding circle elements */
+  .spiral-ring {
+    position: relative;
+  }
+  .spiral-ring::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: #E8E6E6;
+    border: 3px solid #2B2B2B;
+    border-radius: 9999px;
+    z-index: 20;
+    box-shadow: inset 1px 1px 0px white;
+  }
+}
+
+/* Custom gorgeous scrollbar for the notebook pages and mock terminal */
+::-webkit-scrollbar {
+  width: 12.5px;
+  height: 12.5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFF7F8;
+  border-left: 3px solid #2B2B2B;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #F3B6CF;
+  border: 3px solid #2B2B2B;
+  border-radius: 0px;
+  box-shadow: 2px 2px 0px #2B2B2B;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #DCCEF5;
+}
+
+/* Neo brutalist shadows & physical pressing transition matching the high density theme layout */
+.brutal-card {
+  border: 4px solid #2B2B2B;
+  border-radius: 16px;
+  box-shadow: 6px 6px 0px 0px rgba(43, 43, 43, 1);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brutal-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0px 0px rgba(43, 43, 43, 1);
+}
+
+.brutal-btn {
+  border: 3px solid #2B2B2B;
+  box-shadow: 4px 4px 0px 0px rgba(43, 43, 43, 1);
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brutal-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0px 0px rgba(43, 43, 43, 1);
+}
+
+.brutal-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px 0px #2B2B2B;
+}
+
+/* ==========================================
+   HIGH-FIDELITY NEO-BRUTALIST DARK MODE 🌙
+   ========================================== */
+.dark-mode {
+  --color-cream: #121214 !important;
+  --color-soft-gray: #242426 !important;
+  color: #ECECED !important;
+  color-scheme: dark;
+}
+
+/* Background canvas patterns */
+.dark-mode .high-density-dots {
+  background-image: radial-gradient(#2D2D30 1px, transparent 1px) !important;
+  background-color: #121214 !important;
+}
+
+.dark-mode .notebook-ruled {
+  background-color: #121214 !important;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px) !important;
+}
+
+.dark-mode .notebook-grid {
+  background-color: #121214 !important;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px) !important;
+}
+
+/* Class color overrides */
+.dark-mode .bg-white {
+  background-color: #1A1A1E !important;
+}
+
+.dark-mode .bg-\[\#FFF7F8\] {
+  background-color: #121214 !important;
+}
+
+.dark-mode .bg-\[\#FFF7F8\]\/80 {
+  background-color: rgba(26, 26, 30, 0.8) !important;
+}
+
+.dark-mode .bg-\[\#FFF2F5\] {
+  background-color: #2D1418 !important;
+}
+
+.dark-mode .bg-gray-100 {
+  background-color: #242428 !important;
+}
+
+.dark-mode .bg-gray-300 {
+  background-color: #3E3E42 !important;
+}
+
+.dark-mode .hover\:bg-white:hover {
+  background-color: #242428 !important;
+}
+
+/* Pastel structures retain their cute contrasting elements */
+.dark-mode .bg-blush-pink,
+.dark-mode [class*="bg-blush-pink"] {
+  background-color: #F9D7E6 !important;
+}
+.dark-mode .bg-dusty-lavender,
+.dark-mode [class*="bg-dusty-lavender"] {
+  background-color: #DCCEF5 !important;
+}
+.dark-mode .bg-cream,
+.dark-mode [class*="bg-cream"] {
+  background-color: #FFF7F8 !important;
+}
+.dark-mode .bg-rose-pink,
+.dark-mode [class*="bg-rose-pink"] {
+  background-color: #F3B6CF !important;
+}
+
+/* Ensure text inside custom high-contrast note tabs stays dark */
+.dark-mode .bg-blush-pink *,
+.dark-mode .bg-dusty-lavender *,
+.dark-mode .bg-cream *,
+.dark-mode .bg-rose-pink *,
+.dark-mode [class*="bg-blush-pink"] *,
+.dark-mode [class*="bg-dusty-lavender"] *,
+.dark-mode [class*="bg-cream"] *,
+.dark-mode [class*="bg-rose-pink"] * {
+  color: #2B2B2B !important;
+}
+
+/* Dynamic text color mapping for `#2B2B2B` with any opacity */
+.dark-mode [class*="text-[#2B2B2B]"] {
+  color: #ECECED !important;
+}
+.dark-mode [class*="text-[#2B2B2B]/90"] {
+  color: rgba(237, 237, 237, 0.9) !important;
+}
+.dark-mode [class*="text-[#2B2B2B]/85"] {
+  color: rgba(237, 237, 237, 0.85) !important;
+}
+.dark-mode [class*="text-[#2B2B2B]/80"] {
+  color: rgba(237, 237, 237, 0.8) !important;
+}
+.dark-mode [class*="text-[#2B2B2B]/75"] {
+  color: rgba(237, 237, 237, 0.75) !important;
+}
+.dark-mode [class*="text-[#2B2B2B]/70"] {
+  color: rgba(237, 237, 237, 0.7) !important;
+}
+.dark-mode [class*="text-[#2B2B2B]/65"] {
+  color: rgba(237, 237, 237, 0.65) !important;
+}
+.dark-mode [class*="text-[#2B2B2B]/60"] {
+  color: rgba(237, 237, 237, 0.6) !important;
+}
+.dark-mode [class*="text-[#2B2B2B]/55"] {
+  color: rgba(237, 237, 237, 0.55) !important;
+}
+.dark-mode [class*="text-[#2B2B2B]/50"] {
+  color: rgba(237, 237, 237, 0.5) !important;
+}
+.dark-mode [class*="text-[#2B2B2B]/40"] {
+  color: rgba(237, 237, 237, 0.4) !important;
+}
+
+/* Headings and generic typography context */
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5 {
+  color: #FFFFFF !important;
+}
+
+/* Dynamic strong tag context inside markdown */
+.dark-mode strong {
+  color: #F3B6CF !important;
+}
+
+/* Dynamic bold border mapping with white/off-white high contrast look */
+.dark-mode [class*="border-[#2B2B2B]"] {
+  border-color: #EDEDED !important;
+}
+.dark-mode [class*="border-[#2B2B2B]/20"] {
+  border-color: rgba(237, 237, 237, 0.25) !important;
+}
+.dark-mode [class*="border-[#2B2B2B]/10"] {
+  border-color: rgba(237, 237, 237, 0.15) !important;
+}
+.dark-mode [class*="border-[#2B2B2B]/30"] {
+  border-color: rgba(237, 237, 237, 0.35) !important;
+}
+
+.dark-mode .divide-\[\#2B2B2B\]\/5 > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-mode .divide-y-2.divide-\[\#2B2B2B\]\/5 > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Inputs, Textareas, and Buttons colors overrides */
+.dark-mode input, 
+.dark-mode textarea,
+.dark-mode select {
+  background-color: #121214 !important;
+  color: #FFFFFF !important;
+  border-color: #EDEDED !important;
+}
+
+.dark-mode .bg-\[\#2B2B2B\] {
+  background-color: #EDEDED !important;
+  color: #121214 !important;
+}
+
+.dark-mode ::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* High Contrast Neo Brutalist Box Shadows */
+.dark-mode .shadow-\[6px_6px_0px_0px_rgba\(43\,43\,43\,1\)\] {
+  box-shadow: 6px 6px 0px 0px rgba(237, 237, 237, 1) !important;
+}
+.dark-mode .shadow-\[6px_6px_0px_0px_\#2B2B2B\] {
+  box-shadow: 6px 6px 0px 0px #EDEDED !important;
+}
+.dark-mode .shadow-\[8px_8px_0px_0px_\#2B2B2B\] {
+  box-shadow: 8px 8px 0px 0px #EDEDED !important;
+}
+.dark-mode .shadow-\[4px_4px_0px_0px_\#2B2B2B\] {
+  box-shadow: 4px 4px 0px 0px #EDEDED !important;
+}
+.dark-mode .shadow-\[2px_2px_0px_0px_\#2B2B2B\] {
+  box-shadow: 2px 2px 0px 0px #EDEDED !important;
+}
+.dark-mode .shadow-\[3px_3px_0px_0px_\#2B2B2B\] {
+  box-shadow: 3px 3px 0px 0px #EDEDED !important;
+}
+.dark-mode .shadow-\[1.5px_1.5px_0px_\#2B2B2B\] {
+  box-shadow: 1.5px 1.5px 0px #EDEDED !important;
+}
+.dark-mode .shadow-\[2.5px_2.5px_0px_\#2B2B2B\] {
+  box-shadow: 2.5px 2.5px 0px #EDEDED !important;
+}
+.dark-mode .shadow-\[2.5px_2.5px_0px_rgba\(43\,43\,43\,1\)\] {
+  box-shadow: 2.5px 2.5px 0px rgba(237, 237, 237, 1) !important;
+}
+.dark-mode .shadow-inner {
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Card hover scaling overrides */
+.dark-mode .brutal-card {
+  border-color: #EDEDED !important;
+  box-shadow: 6px 6px 0px 0px #EDEDED !important;
+}
+.dark-mode .brutal-card:hover {
+  box-shadow: 8px 8px 0px 0px #EDEDED !important;
+}
+.dark-mode .brutal-btn {
+  border-color: #EDEDED !important;
+  box-shadow: 4px 4px 0px 0px #EDEDED !important;
+}
+.dark-mode .brutal-btn:hover {
+  box-shadow: 5px 5px 0px 0px #EDEDED !important;
+}
+.dark-mode .brutal-btn:active {
+  box-shadow: 0px 0px 0px 0px #EDEDED !important;
+}
+
+/* Page separators, markers and decorations */
+.dark-mode .spiral-ring::before {
+  background: #3E3E42 !important;
+  border-color: #EDEDED !important;
+  box-shadow: inset 1.5px 1.5px 0px rgba(255, 255, 255, 0.25) !important;
+}
+
+.dark-mode ::-webkit-scrollbar-track {
+  background: #121214 !important;
+  border-left: 3px solid #EDEDED !important;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+  background: #F3B6CF !important;
+  border: 3px solid #EDEDED !important;
+  box-shadow: 2px 2px 0px #EDEDED !important;
+}
+
+/* Highlights glow */
+.dark-mode .bg-rose-pink\/50 {
+  background-color: rgba(237, 142, 182, 0.3) !important;
+}
+
