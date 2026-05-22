@@ -15,7 +15,7 @@ export const projectsData: Project[] = [
     ],
     github: "https://github.com",
     link: "#",
-    syncCategory: "AI / ML"
+    syncCategory: "ML"
   },
   {
     id: "02",
@@ -31,7 +31,7 @@ export const projectsData: Project[] = [
     ],
     github: "https://github.com",
     link: "#",
-    syncCategory: "College"
+    syncCategory: "COLLEGE"
   },
   {
     id: "03",
@@ -47,7 +47,7 @@ export const projectsData: Project[] = [
     ],
     github: "https://github.com",
     link: "#",
-    syncCategory: "Build"
+    syncCategory: "BUILD"
   },
   {
     id: "04",
@@ -62,7 +62,7 @@ export const projectsData: Project[] = [
     ],
     github: "https://github.com",
     link: "#",
-    syncCategory: "Backend"
+    syncCategory: "BACKEND"
   }
 ];
 

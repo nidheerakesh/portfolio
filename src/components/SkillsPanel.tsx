@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { skillsData } from "../data";
 import { Check, Star, BadgeCheck, Terminal, Award, Plus, Layers, Flame } from "lucide-react";
-import { useStudySync } from "../hooks/useStudySync";
+import { PortfolioData } from "../hooks/useStudySync";
 
 interface SkillsPanelProps {
   onNotify: (msg: string, type: "success" | "info" | "bubble") => void;
+  portfolioData: PortfolioData | null;
 }
 
-export default function SkillsPanel({ onNotify }: SkillsPanelProps) {
+export default function SkillsPanel({ onNotify, portfolioData }: SkillsPanelProps) {
   const [pinnedSkills, setPinnedSkills] = useState<string[]>([
     "C++", 
     "AI / ML", 
@@ -16,8 +17,6 @@ export default function SkillsPanel({ onNotify }: SkillsPanelProps) {
   ]);
 
   const [customSkill, setCustomSkill] = useState("");
-
-  const { portfolioData } = useStudySync(true);
 
   // Derive dynamic skills based on AEON task completion
   const displaySkills = React.useMemo(() => {

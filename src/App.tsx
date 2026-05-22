@@ -28,6 +28,8 @@ import SkillsPanel from "./components/SkillsPanel";
 import ExperiencePanel from "./components/ExperiencePanel";
 import ResumePanel from "./components/ResumePanel";
 import ContactPanel from "./components/ContactPanel";
+import LiveStatusBar from "./components/LiveStatusBar";
+import { useStudySync } from "./hooks/useStudySync";
 import AiCompanionWidget from "./components/AiCompanionWidget";
 
 type ActiveTab = "about" | "projects" | "skills" | "experience" | "resume" | "contact";
@@ -53,6 +55,8 @@ export default function App() {
   const [isRecruiterMode, setIsRecruiterMode] = useState<boolean>(() => {
     return localStorage.getItem("nidhi_recruiter_mode") === "true";
   });
+
+  const { portfolioData, connectionStatus } = useStudySync(true);
 
   // Show a gorgeous Neo-Brutalist notification toast in the corner
   const showNotification = (msg: string, type: "success" | "info" | "bubble" = "success") => {
@@ -233,9 +237,10 @@ export default function App() {
                   [ DOWNLOAD RESUME ]
                 </button>
               </div>
+              <LiveStatusBar portfolioData={portfolioData} connectionStatus={connectionStatus} />
             </div>
-
           </div>
+        </div>
 
         {/* HIGH-FIDELITY MACARON BROWSER WINDOW WRAPPER */}
         <div className="bg-white border-4 border-[#2B2B2B] rounded-3xl shadow-[8px_8px_0px_0px_#2B2B2B] overflow-hidden transition-all flex flex-col">
@@ -320,13 +325,13 @@ export default function App() {
             {/* Main view injection */}
             <div className="z-10 flex-1 flex flex-col">
               {activeTab === "about" && (
-                <AboutPanel onNotify={showNotification} onSetTab={(tab) => handleTabChange(tab as ActiveTab)} />
+                <AboutPanel onNotify={showNotification} onSetTab={(tab) => handleTabChange(tab as ActiveTab)} portfolioData={portfolioData} />
               )}
               {activeTab === "projects" && (
-                <ProjectsPanel onNotify={showNotification} />
+                <ProjectsPanel onNotify={showNotification} portfolioData={portfolioData} />
               )}
               {activeTab === "skills" && (
-                <SkillsPanel onNotify={showNotification} />
+                <SkillsPanel onNotify={showNotification} portfolioData={portfolioData} />
               )}
               {activeTab === "experience" && (
                 <ExperiencePanel onNotify={showNotification} />

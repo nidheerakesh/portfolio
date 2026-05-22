@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { projectsData } from "../data";
 import { Project, ExplanationLevel } from "../types";
 import { FolderGit2, ArrowUpRight, Github, Sparkles, BookOpen, UserCheck, Cpu, Code2, Play } from "lucide-react";
-import { useStudySync } from "../hooks/useStudySync";
+import { PortfolioData } from "../hooks/useStudySync";
 
 interface ProjectsPanelProps {
   onNotify: (msg: string, type: "success" | "info" | "bubble") => void;
+  portfolioData: PortfolioData | null;
 }
 
-export default function ProjectsPanel({ onNotify }: ProjectsPanelProps) {
+export default function ProjectsPanel({ onNotify, portfolioData }: ProjectsPanelProps) {
   // Reactive Sync state from the planner website integration pipeline
   const [isSyncActive, setIsSyncActive] = useState<boolean>(() => {
     return localStorage.getItem("nidhi_planner_active") !== "false";
@@ -23,8 +24,6 @@ export default function ProjectsPanel({ onNotify }: ProjectsPanelProps) {
       window.removeEventListener("planner_sync_state_toggled", checkState as EventListener);
     };
   }, []);
-
-  const { portfolioData } = useStudySync(isSyncActive, 30000);
 
   // Explain-It AI Interactive Bench State
   const [selectedLevel, setSelectedLevel] = useState<ExplanationLevel>("student");

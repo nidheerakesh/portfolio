@@ -1,5 +1,5 @@
 import { ArrowRight, BookOpen, Terminal, Sparkles, Smile, GraduationCap, MapPin, Code, Activity, CheckCircle2 } from "lucide-react";
-import { useStudySync } from "../hooks/useStudySync";
+import { PortfolioData } from "../hooks/useStudySync";
 
 // Helper to map backend task IDs to human-readable names
 const getTaskName = (taskId: string) => {
@@ -26,10 +26,10 @@ const getTaskName = (taskId: string) => {
 interface AboutPanelProps {
   onNotify: (msg: string, type: "success" | "info" | "bubble") => void;
   onSetTab: (tab: string) => void;
+  portfolioData: PortfolioData | null;
 }
 
-export default function AboutPanel({ onNotify, onSetTab }: AboutPanelProps) {
-  const { portfolioData } = useStudySync(true);
+export default function AboutPanel({ onNotify, onSetTab, portfolioData }: AboutPanelProps) {
 
   return (
     <div className="w-full text-[#2B2B2B] font-sans">
