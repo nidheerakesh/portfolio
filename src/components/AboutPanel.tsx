@@ -1,6 +1,28 @@
 import { ArrowRight, BookOpen, Terminal, Sparkles, Smile, GraduationCap, MapPin, Code, Activity, CheckCircle2 } from "lucide-react";
 import { useStudySync } from "../hooks/useStudySync";
 
+// Helper to map backend task IDs to human-readable names
+const getTaskName = (taskId: string) => {
+  const titles: Record<string, string> = {
+    "w1d5_ml": "NumPy & Pandas",
+    "w1d6_ml": "Matplotlib & Seaborn",
+    "w2d2_ml": "Classification Algos",
+    "w3d4_ml": "Computer Vision (CNN)",
+    "w3d6_ml": "NLP & Transformers",
+    "w4d1_ml": "Reinforcement Learning",
+  };
+  
+  if (titles[taskId]) return titles[taskId];
+  
+  // Generic fallback: w1d6_ml -> W1 D6 (ML)
+  const match = taskId.match(/^w(\d+)d(\d+)_(.+)$/);
+  if (match) {
+    const [, w, d, track] = match;
+    return `Week ${w} Day ${d} (${track.toUpperCase()})`;
+  }
+  return taskId;
+};
+
 interface AboutPanelProps {
   onNotify: (msg: string, type: "success" | "info" | "bubble") => void;
   onSetTab: (tab: string) => void;
@@ -111,32 +133,32 @@ export default function AboutPanel({ onNotify, onSetTab }: AboutPanelProps) {
         {/* Right Column: Mini Stickers, Study Status Indicators */}
         <div className="lg:col-span-4 flex flex-col gap-6">
           {/* Currently Learning Note Card */}
-          <div className="bg-blush-pink border-4 border-[#2B2B2B] rounded-2xl p-5 shadow-[4px_4px_0px_0px_#2B2B2B] relative transform rotate-1 hover:rotate-0 transition-transform">
+          <div className="bg-[#2B2B2B] text-white border-4 border-[#2B2B2B] rounded-2xl p-5 shadow-[4px_4px_0px_0px_#2B2B2B] relative transform rotate-1 hover:rotate-0 transition-transform">
             <div className="absolute top-2 right-2 flex gap-1">
               <span className="w-2.5 h-2.5 rounded-full bg-rose-pink border border-[#2B2B2B]"></span>
-              <span className="w-2.5 h-2.5 rounded-full bg-[#2B2B2B]"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-white"></span>
             </div>
             <h4 className="font-heading text-lg font-bold flex items-center gap-1">
               📌 Status Journal
             </h4>
-            <p className="text-[10px] font-mono text-[#2B2B2B]/65 border-b border-[#2B2B2B]/10 pb-2 mb-3">
+            <p className="text-[10px] font-mono text-white/60 border-b border-white/10 pb-2 mb-3">
               LAST LOG: MAY 2026
             </p>
 
             <div className="space-y-3 font-mono text-xs">
               {portfolioData?.currentFocus ? (
-                <div className="p-2 bg-white/60 border border-rose-pink/40 rounded-xl">
+                <div className="p-2 bg-white/10 border border-rose-pink/40 rounded-xl">
                   <span className="text-rose-pink font-bold flex items-center gap-1.5 mb-0.5">
                     <Activity size={12} className="animate-pulse" /> ACTIVE FOCUS:
                   </span>
-                  <div className="font-sans font-bold text-sm mt-0.5 text-[#2B2B2B]/90">
-                    {portfolioData.currentFocus}
+                  <div className="font-sans font-bold text-sm mt-0.5 text-white/90">
+                    {getTaskName(portfolioData.currentFocus)}
                   </div>
                 </div>
               ) : (
-                <div className="p-2 bg-white/60 border border-[#2B2B2B]/15 rounded-xl">
+                <div className="p-2 bg-white/10 border border-white/10 rounded-xl">
                   <span className="text-rose-pink font-bold">→ </span> LEARNING:
-                  <div className="font-sans font-medium text-sm mt-0.5 text-[#2B2B2B]/90">
+                  <div className="font-sans font-medium text-sm mt-0.5 text-white/90">
                     React 19 & Complex Signal Analysis
                   </div>
                 </div>
@@ -144,27 +166,27 @@ export default function AboutPanel({ onNotify, onSetTab }: AboutPanelProps) {
 
               {portfolioData?.buildLog && portfolioData.buildLog.length > 0 ? (
                 portfolioData.buildLog.slice(0, 2).map((log, i) => (
-                  <div key={i} className="p-2 bg-white/60 border border-[#2B2B2B]/15 rounded-xl">
-                    <span className="text-green-600 font-bold flex items-center gap-1.5 mb-0.5">
+                  <div key={i} className="p-2 bg-white/10 border border-white/10 rounded-xl">
+                    <span className="text-green-400 font-bold flex items-center gap-1.5 mb-0.5">
                       <CheckCircle2 size={12} /> COMPLETED:
                     </span>
-                    <div className="font-sans font-medium text-sm mt-0.5 text-[#2B2B2B]/90 flex justify-between items-start">
-                      <span className="pr-2 leading-tight">{log.taskId}</span>
-                      <span className="text-[10px] text-green-600 font-mono font-bold shrink-0 pt-0.5">+{log.xpEarned} XP</span>
+                    <div className="font-sans font-medium text-sm mt-0.5 text-white/90 flex justify-between items-start">
+                      <span className="pr-2 leading-tight">{getTaskName(log.taskId)}</span>
+                      <span className="text-[10px] text-green-400 font-mono font-bold shrink-0 pt-0.5">+{log.xpEarned} XP</span>
                     </div>
                   </div>
                 ))
               ) : (
                 <>
-                  <div className="p-2 bg-white/60 border border-[#2B2B2B]/15 rounded-xl">
+                  <div className="p-2 bg-white/10 border border-white/10 rounded-xl">
                     <span className="text-dusty-lavender font-bold">→ </span> EXPLORING:
-                    <div className="font-sans font-medium text-sm mt-0.5 text-[#2B2B2B]/90">
+                    <div className="font-sans font-medium text-sm mt-0.5 text-white/90">
                       AI/ML Convolutional Pipelines
                     </div>
                   </div>
-                  <div className="p-2 bg-white/60 border border-[#2B2B2B]/15 rounded-xl">
+                  <div className="p-2 bg-white/10 border border-white/10 rounded-xl">
                     <span className="text-blush-pink font-bold">→ </span> BUILDING:
-                    <div className="font-sans font-medium text-sm mt-0.5 text-[#2B2B2B]/90">
+                    <div className="font-sans font-medium text-sm mt-0.5 text-white/90">
                       B.Tech Exam Hack planners
                     </div>
                   </div>
